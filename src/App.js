@@ -1,25 +1,51 @@
-import logo from './logo.svg';
 import './App.css';
+import Counterunit from './components/Counterunit';
+import { useState } from "react";
 
-function App() {
+const App = () => {
+  /*
+    La ligne suivante va permettre 3 choses :
+    créer un état : counter
+    créer une fonction qui va permettre de modifier l'état : setCounter
+    définir l'état par défaut : 0
+  */
+  const [counter, setCounter] = useState(0);
+  const [tab, setTab] = useState([]);
+  const newTab = [...tab];
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <div className='cont-1'>
+        
+        <div className='firstSection'>
+          <button 
+          className='actionbutton'
+          onClick= {() => { 
+            newTab.push(
+                <Counterunit
+                  counter = {counter}
+                  setCounter = {setCounter}
+                />
+                );
+            
+            console.log(newTab)
 
+          }}
+          >Add counter</button>
+
+
+        <div>{newTab.map((item) => {
+          return item;
+        })}
+        </div>
+
+
+        </div>
+        
+        <Counterunit
+        counter = {counter}
+        setCounter = {setCounter}
+        />
+      </div>
+  );
+};
 export default App;
